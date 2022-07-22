@@ -18,7 +18,7 @@ For getting this Response
 ```json
 {
   "plz1":20095,
-  "plz1":10115,
+  "plz2":10115,
   "distance": 255.65  
 }
 ```
