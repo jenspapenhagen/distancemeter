@@ -13,9 +13,11 @@ public class MeasuringService {
     @Inject
     InfoCrawler infoCrawler;
 
-    private static final double EARTH_RADIUS = 6371.0;
+    // WGS84 ellipsoid
+    private static final double EQUATOR_RADIUS = 6378.137;
 
-    public double callableMeasuring(final Double plz1,final Double plz2) throws IllegalArgumentException {
+    public double callableMeasuring(final Double plz1, final Double plz2) throws IllegalArgumentException {
+
         //getting the locations form the cache or call them
         final Root location1 = infoCrawler.callBackend(plz1);
         final Root location2 = infoCrawler.callBackend(plz2);
@@ -36,7 +38,7 @@ public class MeasuringService {
                 )
         );
 
-        return EARTH_RADIUS * angleDistanceRadians;
+        return EQUATOR_RADIUS * angleDistanceRadians;
     }
 
 }
