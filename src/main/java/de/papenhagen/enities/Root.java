@@ -4,8 +4,8 @@ import lombok.Value;
 
 @Value
 public class Root {
-    Double lat;
-    Double lon;
+    double lat;
+    double lon;
     String state;
-    Integer zipCode;
+    int zipCode;
 }

@@ -1,40 +1,44 @@
 package de.papenhagen.service;
 
 import de.papenhagen.enities.Root;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
+import static de.papenhagen.service.MeasuringService.calculateDistance;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
 
 public class MeasuringServiceUnitTest {
 
-    @Mock
-    private InfoCrawler infoCrawler;
+    private MeasuringService measuringService;
 
-    MeasuringService service;
+    private AutoCloseable openMocks;
 
     @BeforeEach
-    void setUp() {
-        service = new MeasuringService();
+    public void setUp() {
+        openMocks = org.mockito.MockitoAnnotations.openMocks(this);
+        measuringService = new MeasuringService();
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        openMocks.close();
     }
 
     @Test
     public void testngCallableMeasuring() {
         //given
-        final double plz1 = 22525;
-        final double plz2 = 22113;
+        final int plz1 = 22525;
+        final int plz2 = 22113;
 
-        when(infoCrawler.callBackend(eq(plz1))).thenReturn(new Root(53.551086, 9.993682, "Hamburg", 22525));
-        when(infoCrawler.callBackend(eq(plz2))).thenReturn(new Root(53.441086, 9.983682, "Hamburg", 22113));
+        final Root hamburg = new Root(53.551086, 9.993682, "Hamburg", plz1);
+        final Root farAwayFromHamburg = new Root(55.441086, 12.983682, "far away from Hamburg", plz2);
 
         //when
-        final double measuring = service.callableMeasuring(plz1, plz1);
+        final double measuring = calculateDistance(hamburg, farAwayFromHamburg);
 
         //then
-        assertThat(measuring).isEqualTo(28);
+        assertThat(measuring).isEqualTo(285.6615797629339);
     }
 
 }

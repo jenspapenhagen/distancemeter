@@ -4,6 +4,8 @@ import de.papenhagen.SerializerRegistrationCustomizer;
 import de.papenhagen.enities.Root;
 import io.quarkus.cache.CacheResult;
 import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
+
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -24,19 +26,19 @@ import static java.util.Objects.isNull;
  */
 @ApplicationScoped
 @Slf4j
+@RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class InfoCrawler {
 
     @ConfigProperty(name = "zipcode.url", defaultValue = "http://localhost:8000/zipcode/")
     URL url;
 
-    @Inject
-    SerializerRegistrationCustomizer jsonp;
+    private final SerializerRegistrationCustomizer jsonp;
 
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
 
     public Root callBackend(final Double zipcode){
-        final Root fallback = new Root(0D,0D, "Fallback", 123);
+        final Root fallback = new Root(0.0,0.0, "Fallback", 12323);
         if(isNull(zipcode)) {
             log.error("try to get distance form invalid zipCode");
             return fallback;
