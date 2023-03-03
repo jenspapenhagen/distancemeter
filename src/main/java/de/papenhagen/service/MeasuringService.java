@@ -1,6 +1,8 @@
 package de.papenhagen.service;
 
+import org.openjdk.jmh.annotations.CompilerControl;
 import de.papenhagen.enities.Root;
+
 import lombok.NonNull;
 
 public class MeasuringService {
@@ -8,7 +10,9 @@ public class MeasuringService {
     //radius of Earth in kilometer WGS84
     private static final double EQUATOR_RADIUS = 6378.137;
 
-    public static double calculateDistance(@NonNull final Root location1, @NonNull final Root location2) throws IllegalArgumentException {
+    @CompilerControl(CompilerControl.Mode.INLINE)
+    public static double calculateDistance(@NonNull final Root location1,
+                                           @NonNull final Root location2) throws IllegalArgumentException {
         // all split into single lines for better profiling.
         final double lat01 = location1.getLat();
         final double lon01 = location1.getLon();
@@ -50,4 +54,26 @@ public class MeasuringService {
         return EQUATOR_RADIUS * angleDistanceRadians;
     }
 
+    public static double calculateDistanceOriginal(@NonNull final Root location1, @NonNull final Root location2) throws IllegalArgumentException {
+
+        final double lat01 = location1.getLat();
+        final double lon01 = location1.getLon();
+
+        final double lat02 = location2.getLat();
+        final double lon02 = location2.getLon();
+
+        final double dLat = Math.toRadians(lat02 - lat01);
+        final double dLon = Math.toRadians(lon02 - lon01);
+
+        final double latDelta = Math.sin(dLat / 2);
+        final double lonDelta = Math.sin(dLon / 2);
+
+        final double lat01Radios = Math.toRadians(lat01);
+        final double lat02Radios = Math.toRadians(lat02);
+        final double a = (latDelta * latDelta) + (lonDelta * lonDelta * Math.cos(lat01Radios) * Math.cos(lat02Radios));
+
+        final double angleDistanceRadians = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return EQUATOR_RADIUS * angleDistanceRadians;
+    }
 }
