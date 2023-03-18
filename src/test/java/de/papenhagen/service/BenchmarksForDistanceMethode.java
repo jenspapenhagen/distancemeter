@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static de.papenhagen.service.MeasuringService.calculateDistance;
-import static de.papenhagen.service.MeasuringService.calculateDistanceOriginal;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.openjdk.jmh.annotations.Mode.AverageTime;
 import static org.openjdk.jmh.annotations.Scope.Thread;
@@ -75,7 +73,7 @@ public class BenchmarksForDistanceMethode {
                 final Root root1 = (Root) context.input[0].get(i);
                 final Root root2 = (Root) context.input[1].get(i);
 
-                context.results[i] = calculateDistance(root1, root2);
+                context.results[i] = MeasuringService.calculateDistance(root1, root2);
             }
         }
     }
@@ -88,7 +86,7 @@ public class BenchmarksForDistanceMethode {
                 final Root root1 = (Root) context.input[0].get(i);
                 final Root root2 = (Root) context.input[1].get(i);
 
-                context.results[i] = calculateDistanceOriginal(root1, root2);
+                context.results[i] = MeasuringService.calculateDistanceOriginal(root1, root2);
             }
         }
     }

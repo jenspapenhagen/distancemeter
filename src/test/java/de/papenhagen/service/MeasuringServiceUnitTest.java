@@ -5,19 +5,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static de.papenhagen.service.MeasuringService.calculateDistance;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MeasuringServiceUnitTest {
 
-    private MeasuringService measuringService;
 
     private AutoCloseable openMocks;
 
     @BeforeEach
     public void setUp() {
         openMocks = org.mockito.MockitoAnnotations.openMocks(this);
-        measuringService = new MeasuringService();
     }
 
     @AfterEach
@@ -35,7 +32,7 @@ public class MeasuringServiceUnitTest {
         final Root farAwayFromHamburg = new Root(55.441086, 12.983682, "far away from Hamburg", plz2);
 
         //when
-        final double measuring = calculateDistance(hamburg, farAwayFromHamburg);
+        final double measuring = MeasuringService.calculateDistance(hamburg, farAwayFromHamburg);
 
         //then
         assertThat(measuring).isEqualTo(285.6615797629339);

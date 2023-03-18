@@ -5,7 +5,11 @@ import de.papenhagen.enities.Root;
 
 import lombok.NonNull;
 
-public class MeasuringService {
+@SuppressWarnings("checkstyle:HideUtilityClassConstructor")
+public final class MeasuringService {
+
+    private MeasuringService() {
+    }
 
     //radius of Earth in kilometer WGS84
     private static final double EQUATOR_RADIUS = 6378.137;
