@@ -14,11 +14,11 @@ public class MeasuringService {
     public static double calculateDistance(@NonNull final Root location1,
                                            @NonNull final Root location2) throws IllegalArgumentException {
         // all split into single lines for better profiling.
-        final double lat01 = location1.getLat();
-        final double lon01 = location1.getLon();
+        final double lat01 = location1.lat();
+        final double lon01 = location1.lon();
 
-        final double lat02 = location2.getLat();
-        final double lon02 = location2.getLon();
+        final double lat02 = location2.lat();
+        final double lon02 = location2.lon();
 
         final double Lat1InRadian = Math.toRadians(lat01);
         final double Lat2InRadian = Math.toRadians(lat02);
@@ -56,11 +56,11 @@ public class MeasuringService {
 
     public static double calculateDistanceOriginal(@NonNull final Root location1, @NonNull final Root location2) throws IllegalArgumentException {
 
-        final double lat01 = location1.getLat();
-        final double lon01 = location1.getLon();
+        final double lat01 = location1.lat();
+        final double lon01 = location1.lon();
 
-        final double lat02 = location2.getLat();
-        final double lon02 = location2.getLon();
+        final double lat02 = location2.lat();
+        final double lon02 = location2.lon();
 
         final double dLat = Math.toRadians(lat02 - lat01);
         final double dLon = Math.toRadians(lon02 - lon01);

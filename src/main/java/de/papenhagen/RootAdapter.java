@@ -10,10 +10,10 @@ public class RootAdapter implements JsonbAdapter<Root, JsonObject> {
     @Override
     public JsonObject adaptToJson(Root root) throws Exception {
         return Json.createObjectBuilder()
-                .add("lat", root.getLat())
-                .add("lon", root.getLon())
-                .add("state", root.getState())
-                .add("zipCode", root.getZipCode())
+                .add("lat", root.lat())
+                .add("lon", root.lon())
+                .add("state", root.state())
+                .add("zipCode", root.zipCode())
                 .build();
 
     }
