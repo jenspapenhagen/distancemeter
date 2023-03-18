@@ -5,6 +5,7 @@ import de.papenhagen.utils.MeasuringUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +16,7 @@ public class MeasuringUtilUnitTest {
 
     @BeforeEach
     public void setUp() {
-        openMocks = org.mockito.MockitoAnnotations.openMocks(this);
+        openMocks = MockitoAnnotations.openMocks(this);
     }
 
     @AfterEach
