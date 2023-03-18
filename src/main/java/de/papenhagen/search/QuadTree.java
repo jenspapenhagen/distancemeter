@@ -2,6 +2,7 @@ package de.papenhagen.search;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import javax.annotation.Nonnull;
 import java.awt.geom.Rectangle2D;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class QuadTree {
     }
 
     @SuppressFBWarnings(value = "EI_EXPOSE_REP2",
-              justification = "Extra Constructor with a root node")
+            justification = "Extra Constructor with a root node")
     public QuadTree(final QuadTreeNode rootNode) {
         this.mRootNode = rootNode;
     }
@@ -36,6 +37,7 @@ public class QuadTree {
         this.mRootNode.removeNeighbour(id);
     }
 
+    @Nonnull
     public Set<Neighbour> findNeighbours(final double latitude, final double longitude, final double rangeInKm) {
         final Set<Neighbour> neighbourSet = new HashSet<>();
         double rangeInDegrees = kmToDegree(rangeInKm);

@@ -19,7 +19,6 @@ public class SearchUnitTest {
     @BeforeEach
     public void setUp() {
         openMocks = MockitoAnnotations.openMocks(this);
-        fill();
     }
 
     @AfterEach
@@ -32,9 +31,10 @@ public class SearchUnitTest {
         //given
         QuadTreeNode quadTreeNode = new QuadTreeNode(0, 0, 180, 360);
         mQuadTree = new QuadTree(quadTreeNode);
+        fill();
 
         //when
-        Set<Neighbour> neighbours = mQuadTree.findNeighbours(50, 50, 100);
+        Set<Neighbour> neighbours = mQuadTree.findNeighbours(50, 50, 20);
 
         //then
         assertThat(neighbours).isNotNull();
