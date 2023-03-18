@@ -1,6 +1,7 @@
 package de.papenhagen.service;
 
 import de.papenhagen.enities.Root;
+import de.papenhagen.utils.MeasuringUtil;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.CompilerControl;
@@ -73,7 +74,7 @@ public class BenchmarksForDistanceMethode {
                 final Root root1 = (Root) context.input[0].get(i);
                 final Root root2 = (Root) context.input[1].get(i);
 
-                context.results[i] = MeasuringService.calculateDistance(root1, root2);
+                context.results[i] = MeasuringUtil.calculateDistance(root1, root2);
             }
         }
     }
@@ -86,7 +87,7 @@ public class BenchmarksForDistanceMethode {
                 final Root root1 = (Root) context.input[0].get(i);
                 final Root root2 = (Root) context.input[1].get(i);
 
-                context.results[i] = MeasuringService.calculateDistanceOriginal(root1, root2);
+                context.results[i] = MeasuringUtil.calculateDistanceOriginal(root1, root2);
             }
         }
     }

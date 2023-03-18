@@ -3,7 +3,7 @@ package de.papenhagen;
 import de.papenhagen.enities.Distance;
 import de.papenhagen.enities.Root;
 import de.papenhagen.service.InfoCrawler;
-import de.papenhagen.service.MeasuringService;
+import de.papenhagen.utils.MeasuringUtil;
 
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
@@ -28,7 +28,7 @@ public class DistanceMeterResource {
         final Root location1 = this.infoCrawler.callBackend(plz1);
         final Root location2 = this.infoCrawler.callBackend(plz2);
 
-        final double callableMeasuring = MeasuringService.calculateDistance(location1, location2);
+        final double callableMeasuring = MeasuringUtil.calculateDistance(location1, location2);
 
         return new Distance(plz1, plz2, callableMeasuring);
     }

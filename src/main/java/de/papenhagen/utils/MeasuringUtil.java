@@ -1,4 +1,4 @@
-package de.papenhagen.service;
+package de.papenhagen.utils;
 
 import org.openjdk.jmh.annotations.CompilerControl;
 import de.papenhagen.enities.Root;
@@ -6,9 +6,9 @@ import de.papenhagen.enities.Root;
 import lombok.NonNull;
 
 @SuppressWarnings("checkstyle:HideUtilityClassConstructor")
-public final class MeasuringService {
+public final class MeasuringUtil {
 
-    private MeasuringService() {
+    private MeasuringUtil() {
     }
 
     //radius of Earth in kilometer WGS84
