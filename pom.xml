@@ -20,7 +20,7 @@
         <quarkus.platform.version>3.5.0</quarkus.platform.version>
 
         <skipITs>true</skipITs>
-        <surefire-plugin.version>3.2.1</surefire-plugin.version>
+        <surefire-plugin.version>3.2.2</surefire-plugin.version>
         <jmh.version>1.37</jmh.version>
 
         <spotbugs.exclude.filter.file>../config/spotbugs/spotbugs-exclude.xml</spotbugs.exclude.filter.file>
