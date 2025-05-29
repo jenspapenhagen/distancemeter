@@ -4,14 +4,14 @@ import de.papenhagen.enities.Distance;
 import de.papenhagen.enities.Root;
 import de.papenhagen.service.InfoCrawler;
 import de.papenhagen.utils.MeasuringUtil;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
-import javax.inject.Inject;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 @Path("/")
 public class DistanceMeterResource {
