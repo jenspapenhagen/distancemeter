@@ -1,9 +1,10 @@
 package de.papenhagen;
 
-import javax.inject.Singleton;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
-import javax.json.bind.JsonbConfig;
+
+import jakarta.inject.Singleton;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbConfig;
 
 @Singleton
 public class SerializerRegistrationCustomizer {

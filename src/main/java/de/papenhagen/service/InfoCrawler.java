@@ -3,15 +3,15 @@ package de.papenhagen.service;
 import de.papenhagen.SerializerRegistrationCustomizer;
 import de.papenhagen.enities.Root;
 import io.quarkus.cache.CacheResult;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,14 +24,15 @@ import static java.util.Objects.isNull;
  * @author jens papenhagen
  */
 @ApplicationScoped
-@Slf4j
-@RequiredArgsConstructor(onConstructor_ = {@Inject})
 public class InfoCrawler {
+
+    private static final Logger log = LoggerFactory.getLogger(InfoCrawler.class);
 
     @ConfigProperty(name = "zipcode.url", defaultValue = "http://localhost:8000/zipcode/")
     URL url;
 
-    private final SerializerRegistrationCustomizer jsonp;
+    @Inject
+    SerializerRegistrationCustomizer jsonp;
 
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -44,9 +45,9 @@ public class InfoCrawler {
         }
 
         try (Response response = callRemote(zipcode)) {
-            String output = response.readEntity(String.class);
+            final String output = response.readEntity(String.class);
 
-            return this.jsonp.jsonb().fromJson(output, Root.class);
+            return jsonp.jsonb().fromJson(output, Root.class);
         }
         catch (Exception e) {
             log.warn("An Exception get thrown: {}, sending the Fallback", e.getLocalizedMessage());
@@ -56,16 +57,17 @@ public class InfoCrawler {
 
 
     @CacheResult(cacheName = "distance-cache")
-    private Response callRemote(final double zipcode) {
-        Client client = ClientBuilder
+    public Response callRemote(final double zipcode) {
+        try (Client client = ClientBuilder
                 .newBuilder()
                 .executorService(this.executorService)
-                .build();
+                .build()) {
 
-        return client.target(String.valueOf(this.url))
-                .path(String.valueOf(zipcode))
-                .request()
-                .get();
+            return client.target(String.valueOf(this.url))
+                    .path(String.valueOf(zipcode))
+                    .request()
+                    .get();
+        }
     }
 
 }

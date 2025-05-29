@@ -1,10 +1,10 @@
 package de.papenhagen;
 
 import de.papenhagen.enities.Root;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.bind.adapter.JsonbAdapter;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.bind.adapter.JsonbAdapter;
 
 public class RootAdapter implements JsonbAdapter<Root, JsonObject> {
     @Override
