@@ -22,7 +22,7 @@
 
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <quarkus.platform.version>3.31.4</quarkus.platform.version>
-        <surefire-plugin.version>3.5.4</surefire-plugin.version>
+        <surefire-plugin.version>3.5.5</surefire-plugin.version>
 
         <jmh.version>1.37</jmh.version>
 
